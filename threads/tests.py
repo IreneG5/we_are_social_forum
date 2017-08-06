@@ -21,7 +21,7 @@ class SubjectPageTest(TestCase):
 
 class ThreadsPageTest(TestCase):
     def test_check_threads_content_is_correct(self):
-        threads_page = resolve('/threads/1/')
+        threads_page = self.client.get('/threads/1/')
         # threads_page = self.client.get(reverse('threads',kwargs={'subject_id':'1'}))
         self.assertEqual(threads_page.status_code, 200)
 

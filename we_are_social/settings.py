@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'products',
     'magazines',
     'threads',
+    'polls',
 ]
 
 AUTH_USER_MODEL = 'accounts.User'

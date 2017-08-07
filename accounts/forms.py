@@ -7,6 +7,7 @@ class UserRegistrationForm(UserCreationForm):
     MONTH_CHOICES = [(i,i,) for i in xrange(1, 12)]
     YEAR_CHOICES = [(i,i,) for i in xrange(2015, 2036)]
 
+    email = forms.EmailField(label='Email', required=True)
     credit_card_number = forms.CharField(label='Credit card number')
     cvv = forms.CharField(label='Security code (CVV)')
     expiry_month = forms.ChoiceField(label="Month", choices=MONTH_CHOICES)
@@ -33,7 +34,7 @@ class UserRegistrationForm(UserCreationForm):
 
         if password1 and password2 and password1 != password2:
             message = "Passwords do not match"
-            raise ValidationError(message)
+            raise forms.ValidationError(message)
 
         return password2
 

@@ -27,6 +27,9 @@ class ThreadsPageTest(TestCase):
         super(ThreadsPageTest, self).setUp()
         self.subject_id = 1
 
+    def tearDown(self):
+        del self
+
     def test_check_threads_status_code_is_correct(self):
         threads_page = self.client.get('/threads/%i/' % self.subject_id)
         self.assertEqual(threads_page.status_code, 200)
@@ -41,18 +44,6 @@ class ThreadsPageTest(TestCase):
         subject = get_object_or_404(Subject, pk=self.subject_id)
         threads_page_template_output = render_to_response("forum/threads.html", {'subject': subject}).content
         self.assertEqual(threads_page.content, threads_page_template_output)
-
-
-class SubjectPageTest(TestCase):
-
-    fixtures = ['subjects', 'user']
-
-    def test_check_content_is_correct(self):
-        subject_page = self.client.get('/forum/')
-        self.assertTemplateUsed(subject_page, "forum/forum.html")
-        subject_page_template_output = render_to_response("forum/forum.html",
-                                                          {'subjects': Subject.objects.all()}).content
-        self.assertEqual(subject_page.content, subject_page_template_output)
 
 
 class PostsPageTest(TestCase):

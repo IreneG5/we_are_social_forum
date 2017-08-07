@@ -1,5 +1,4 @@
 from django.shortcuts import render, get_object_or_404
-# from models import Subject, Thread, Post
 from django.shortcuts import redirect
 from django.contrib import messages, auth
 from django.contrib.auth.decorators import login_required

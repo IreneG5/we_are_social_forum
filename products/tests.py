@@ -2,8 +2,6 @@ from django.test import TestCase
 from products.views import all_products
 from django.core.urlresolvers import resolve
 from django.shortcuts import render_to_response
-from models import Product
-from django.shortcuts import render
 
 
 # Create your tests here.

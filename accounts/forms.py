@@ -7,7 +7,7 @@ class UserRegistrationForm(UserCreationForm):
     MONTH_CHOICES = [(i,i,) for i in xrange(1, 12)]
     YEAR_CHOICES = [(i,i,) for i in xrange(2015, 2036)]
 
-    email = forms.EmailField(label='Email', required=True)
+    #email = forms.EmailField(label='Email', required=True)
     credit_card_number = forms.CharField(label='Credit card number')
     cvv = forms.CharField(label='Security code (CVV)')
     expiry_month = forms.ChoiceField(label="Month", choices=MONTH_CHOICES)
@@ -37,6 +37,13 @@ class UserRegistrationForm(UserCreationForm):
             raise forms.ValidationError(message)
 
         return password2
+
+    def clean_email(self):
+        email = self.cleaned_data.get('email')
+
+        if not email:
+            message = "Please enter your email address"
+            raise forms.ValidationError(message)
 
     def save(self, commit=True):
         instance = super(UserRegistrationForm, self).save(commit=False)
